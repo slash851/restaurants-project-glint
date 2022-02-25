@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        this.authService.authSubject.subscribe(resp => {
+        this.authService.authSubject.subscribe((resp: any) => {
             this.isAuthenticated = resp && resp.token;
         })
 
@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit, AfterViewInit {
      */
     onLogout() {
         this.authService.logout();
-        this.snotifyService.warning("You have been looged out", 'logout', {
+        this.snotifyService.warning('You have been looged out', 'logout', {
             timeout: 5000,
         });
     }

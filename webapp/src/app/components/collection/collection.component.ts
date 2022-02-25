@@ -56,15 +56,16 @@ export class CollectionComponent implements OnInit {
     onSubmit() {
         if (this.collectionForm.get('collectionName')) {
             this.apiService.addCollection(this.collectionForm.get('collectionName')!.value).subscribe(() => {
-                this.collectionForm.reset();
-                this.snotifyService.success('Collection added successfully', 'Added', {
-                    timeout: 5000,
-                    buttons: [{text: 'Well done!'}]
-                });
-                this.getCollections();
-            }, (error => {
-                console.log(error)
-            }))
+                    this.collectionForm.reset();
+                    this.snotifyService.success('Collection added successfully', 'Added', {
+                        timeout: 5000,
+                        buttons: [{text: 'Well done!'}]
+                    });
+                    this.getCollections();
+                }, ((error: any) => {
+                    console.log(error)
+                })
+            )
         }
 
     }
@@ -83,7 +84,7 @@ export class CollectionComponent implements OnInit {
             this.getCollections();
             this.spinner.hide();
             this.cd.markForCheck();
-        }, (error => {
+        }, ((error: any) => {
             console.log(error)
             this.spinner.hide();
             this.cd.markForCheck();
