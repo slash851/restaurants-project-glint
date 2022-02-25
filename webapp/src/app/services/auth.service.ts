@@ -49,7 +49,7 @@ export class AuthService {
     /**
      * logout user
      */
-    public logout(): string{
+    public logout(): string {
         localStorage.clear();
         this.authSubject.next(null);
         return 'User logged out';

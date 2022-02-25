@@ -40,12 +40,13 @@
 
                 <mat-icon [matMenuTriggerFor]="menu" #menuTrigger class="btn">library_add</mat-icon>
                 <mat-menu #menu="matMenu">
-                    <ul>
+                    <ul *ngIf="isAuthenticated">
                         <li *ngFor="let collection of collectionsDataSource;">
                             <button mat-menu-item
                                     (click)="addToCollection(restaurant.id, collection.id)">{{ collection.name }}</button>
                         </li>
                     </ul>
+                    <button *ngIf="!isAuthenticated" mat-button routerLink="/login">Login</button>
                 </mat-menu>
             </td>
         </ng-container>
@@ -54,9 +55,3 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
 </div>
-
-<!--<ul>-->
-<!--    <li *ngFor="let restaurant of dataSource; index as i">-->
-<!--        {{ i + 1 }}. {{ restaurant.name }}-->
-<!--    </li>-->
-<!--</ul>-->

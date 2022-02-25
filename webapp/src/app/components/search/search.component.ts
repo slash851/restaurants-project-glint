@@ -6,7 +6,7 @@ import {SnotifyService} from 'ng-snotify';
 import {MatDialog} from '@angular/material/dialog';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {ICollection} from '../../models/collection.model';
-
+import {AuthService} from '../../services/auth.service';
 
 
 @Component({
@@ -27,10 +27,12 @@ export class SearchComponent implements OnInit {
         openAt: new FormControl(''),
     });
     dayList: string[] = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    isAuthenticated = false;
 
     constructor(public apiService: ApiService,
                 public spinner: NgxSpinnerService,
                 public dialog: MatDialog,
+                public authService: AuthService,
                 public snotifyService: SnotifyService) {
     }
 
@@ -62,11 +64,14 @@ export class SearchComponent implements OnInit {
      * get list of user collections
      */
     getCollections() {
-        this.apiService.getListUserCollections().subscribe(
-            (response: any) => {
-                this.spinner.hide();
-                this.collectionsDataSource = response;
-            });
+        this.isAuthenticated = this.authService.isAuthenticated();
+        if (this.isAuthenticated) {
+            this.apiService.getListUserCollections().subscribe(
+                (response: any) => {
+                    this.spinner.hide();
+                    this.collectionsDataSource = response;
+                });
+        }
     }
 
 
@@ -84,7 +89,7 @@ export class SearchComponent implements OnInit {
                     timeout: 5000,
                     buttons: [{text: 'Try again!'}]
                 });
-            }, (err) => {
+            }, (err: Error) => {
                 console.log(err);
                 this.spinner.hide();
                 this.snotifyService.warning('Ups! Looks like there is an issue with server', 'Error', {
