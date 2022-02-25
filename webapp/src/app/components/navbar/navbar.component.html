@@ -1,0 +1,33 @@
+<div class="mat-elevation-z6">
+    <a mat-button="" routerLink="/search" aria-label="Home"
+       class="mat-focus-indicator docs-button mat-button mat-button-base" tabindex="0" aria-disabled="false"
+       href="/"><span class="mat-button-wrapper">
+        <mat-icon aria-hidden="false" aria-label="search icon">search</mat-icon>
+    <span>Search</span></span>
+    </a>
+    <a *ngIf="!isAuthenticated" mat-button="" routerLink="/login" aria-label="Login"
+       class="mat-focus-indicator docs-button mat-button mat-button-base" tabindex="0" aria-disabled="false"
+       href="/"><span class="mat-button-wrapper">
+        <mat-icon aria-hidden="false" aria-label="search icon">login</mat-icon>
+    <span>Login</span></span>
+    </a>
+    <a *ngIf="isAuthenticated" mat-button="" routerLink="/collections" aria-label="Login"
+       class="mat-focus-indicator docs-button mat-button mat-button-base" tabindex="0" aria-disabled="false"
+       href="/"><span class="mat-button-wrapper">
+        <mat-icon aria-hidden="false" aria-label="search icon">view_list</mat-icon>
+    <span>Collections</span></span>
+    </a>
+    <a *ngIf="!isAuthenticated" mat-button="" routerLink="/register" aria-label="Register"
+       class="mat-focus-indicator docs-button mat-button mat-button-base" tabindex="0" aria-disabled="false"
+       href="/"><span class="mat-button-wrapper">
+        <mat-icon aria-hidden="false" aria-label="search icon">touch_app</mat-icon>
+    <span>Register</span></span>
+    </a>
+    <a *ngIf="isAuthenticated" mat-button="" aria-label="Logout" (click)="onLogout()"
+       class="mat-focus-indicator docs-button mat-button mat-button-base logout" tabindex="0" aria-disabled="false"
+       href="/"><span class="mat-button-wrapper">
+        <mat-icon aria-hidden="false" aria-label="search icon">logout</mat-icon>
+    <span>Logout</span></span>
+    </a>
+</div>
+

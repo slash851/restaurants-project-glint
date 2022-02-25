@@ -1,0 +1,30 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+    <div *ngIf="!registeredSuccess">
+        <mat-card class="box card">
+            <mat-card-header>
+                <mat-card-title>Register</mat-card-title>
+            </mat-card-header>
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <mat-card-content>
+                    <mat-form-field class="full-width">
+                        <input autocomplete="off" formControlName="email" matInput placeholder="Email">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input type="password" autocomplete="off" formControlName="password" matInput
+                               placeholder="Password">
+                    </mat-form-field>
+                    <mat-form-field class="full-width">
+                        <input autocomplete="off" type="password" formControlName="rePassword" matInput
+                               placeholder="Repeate password">
+                    </mat-form-field>
+                </mat-card-content>
+                <button [disabled]="!registerForm.valid" type="submit" mat-stroked-button color="accent"
+                        class="btn-block">Register
+                </button>
+            </form>
+
+        </mat-card>
+    </div>
+    <div *ngIf="registeredSuccess"> Registered successfully! 🥳</div>
+
+</div>
