@@ -33,7 +33,12 @@ Run `npm run test` to execute the unit tests
 
 ## Deployment
 
+
+
 ### prerequirements
+
+install firebase cli and login to firebase account
+
 production environemnt require db variale:
 `DB_URI=xxx` to connect to database
 
@@ -41,3 +46,14 @@ production environemnt require db variale:
 Run `firebase deploy --only functions`
 
 Note: deployment command takes care of compiling source to js so no need for building lib artifacts
+
+
+## database
+
+Production version of the app is connected to postgress database hosted in heroku
+
+Below Schema of the db
+
+![database schema](https://live.staticflickr.com/65535/51903656240_f222a87255_z.jpg)
+
+
