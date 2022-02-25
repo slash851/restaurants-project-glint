@@ -1,0 +1,49 @@
+{
+  "name": "functions",
+  "version": "1.0.1",
+  "scripts": {
+    "tsc_ver": "/home/karol/.nvm/versions/node/v14.18.1/bin/tsc --version",
+    "npm_ver": "node_modules/.bin/npm --version",
+    "build": "/home/karol/.nvm/versions/node/v14.18.1/bin/tsc",
+    "build-functions": "/home/karol/.nvm/versions/node/v14.18.1/bin/tsc",
+    "start": "node lib/index.js",
+    "serve": "yarn run build && firebase emulators:start --only functions",
+    "shell": "yarn run build && firebase functions:shell",
+    "deploy-functions": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "14"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/jsonwebtoken": "^8.5.8",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "1.19.0",
+    "bson": "^4.6.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "4.17.1",
+    "firebase": "^9.5.0",
+    "firebase-admin": "^9.8.0",
+    "firebase-functions": "^3.14.1",
+    "firebase-tools": "^9.23.0",
+    "helmet": "3.20.1",
+    "inversify": "^6.0.1",
+    "inversify-binding-decorators": "4.0.0",
+    "inversify-express-utils": "^6.4.3",
+    "inversify-logger-middleware": "3.1.0",
+    "mongodb": "3.3.2",
+    "morgan": "1.9.1",
+    "pg": "^8.7.3",
+    "reflect-metadata": "^0.1.13",
+    "request": "^2.88.2",
+    "version": "^0.1.2"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^0.2.0",
+    "typescript": "^3.8.0"
+  },
+  "private": true
+}
