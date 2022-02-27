@@ -61,9 +61,18 @@ export class CollectionsService {
      * @param {string} collectionName
      */
     public async removeCollection(collectionId: number): Promise<any> {
-        const query: string = `DELETE FROM collections WHERE id=${collectionId}`;
+
         try {
+
+            //remove all objects from junction table first
+            let query: string = `DELETE FROM collection_restaurant WHERE collection_id=${collectionId}`;
             await this.dbService.client.query(query);
+
+            // remove actual collection
+            query = `DELETE FROM collections WHERE id=${collectionId}`;
+            await this.dbService.client.query(query);
+
+
             return {message: 'collection removed'}
         } catch (e) {
             throw e;
