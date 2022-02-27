@@ -23,9 +23,8 @@
 </form>
 
 <mat-divider></mat-divider>
-<!--todo: Introduce pagination for the table-->
-<div *ngIf="searchDataSource.length > 0">
-    <table mat-table [dataSource]="searchDataSource" class="mat-elevation-z8 restaurants-table">
+<div *ngIf="dataSource" mb-4>
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 restaurants-table">
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
@@ -47,6 +46,7 @@
                         </li>
                     </ul>
                     <button *ngIf="!isAuthenticated" mat-button routerLink="/login">Login</button>
+                    <button *ngIf="isAuthenticated && collectionsDataSource.length === 0" mat-button routerLink="/collections">No collections, add one first...</button>
                 </mat-menu>
             </td>
         </ng-container>
@@ -54,4 +54,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <mat-paginator #paginator
+                   class="mat-elevation-z8 restaurants-table"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]">
+    </mat-paginator>
 </div>
