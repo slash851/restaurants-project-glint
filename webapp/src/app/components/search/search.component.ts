@@ -7,6 +7,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {MatMenuTrigger} from '@angular/material/menu';
 import {ICollection} from '../../models/collection.model';
 import {AuthService} from '../../services/auth.service';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatPaginator} from '@angular/material/paginator';
 
 
 @Component({
@@ -16,9 +18,11 @@ import {AuthService} from '../../services/auth.service';
 })
 export class SearchComponent implements OnInit {
     @ViewChild('menuTrigger') menuTrigger!: MatMenuTrigger;
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
+
 
     displayedColumns: string[] = ['name', 'remove'];
-    searchDataSource = []
+    dataSource = new MatTableDataSource<any>([]);
     collectionsDataSource: ICollection[] = []
 
     searchForm = new FormGroup({
@@ -49,7 +53,8 @@ export class SearchComponent implements OnInit {
         this.apiService.getListOfRestaurants(searchValues).subscribe(
             (response: any) => {
                 this.spinner.hide();
-                this.searchDataSource = response;
+                this.dataSource = new MatTableDataSource<any>(response);
+                this.dataSource.paginator = this.paginator;
             }, () => {
                 this.spinner.hide();
                 this.snotifyService.warning('Ups! Looks like there is an issue with server', 'Error', {
@@ -87,7 +92,7 @@ export class SearchComponent implements OnInit {
                 this.spinner.hide();
                 this.snotifyService.success(`Restaurant added to your collection!`, 'You got it!', {
                     timeout: 5000,
-                    buttons: [{text: 'Try again!'}]
+                    buttons: [{text: 'Keep adding!'}]
                 });
             }, (err: Error) => {
                 console.log(err);

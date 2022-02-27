@@ -20,6 +20,7 @@ export class RestaurantsService {
        */
       public async getRestaurants(nameLike?: string, openAt?: string, day?: number): Promise<IRestaurant[]> {
             const query = RestaurantsService.buildRestaurantQuery(nameLike, openAt, day);
+            //todo: introduce paginations on calls
             const response = await this.dbService.client.query(query);
             return response.rows;
       }
@@ -32,11 +33,11 @@ export class RestaurantsService {
        * @private
        */
       private static buildRestaurantQuery(name?: string, openAt?: string, day?: number): string {
-            let query = `SELECT name,id FROM opening_hours RIGHT JOIN restaurants ON (opening_hours.restaurant_id = restaurants.id)`;
+            let query = `SELECT name,restaurants.id FROM opening_hours RIGHT JOIN restaurants ON (opening_hours.restaurant_id = restaurants.id)`;
             query += name ? DbUtils.addWhereOrAndToQuery(query) + `LOWER(name) LIKE '%${name.toLocaleLowerCase()}%'` : '';
             query += openAt ? DbUtils.addWhereOrAndToQuery(query) + `open_from <= '${openAt}' AND open_to > '${openAt}'` : '';
             query += day !== undefined && day !== null ? DbUtils.addWhereOrAndToQuery(query) + `day IN (${day})` : '';
-            query += ' GROUP BY name,id';
+            query += ' GROUP BY name, restaurants.id';
             return query;
       }
 }
