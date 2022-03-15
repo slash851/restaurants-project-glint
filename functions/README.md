@@ -54,6 +54,6 @@ Production version of the app is connected to postgress database hosted in herok
 
 Below Schema of the db
 
-![database schema](https://live.staticflickr.com/65535/51903656240_f222a87255_z.jpg)
+![database schema](https://live.staticflickr.com/65535/51917209286_ed735ceafb_z.jpg)
 
 
